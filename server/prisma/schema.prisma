@@ -11,13 +11,14 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String   @unique
-  phone     String   @unique @db.VarChar(10)
-  password  String
-  role      Role
-  createdAt DateTime @default(now())
+  id             Int              @id @default(autoincrement())
+  name           String
+  email          String           @unique
+  phone          String           @unique @db.VarChar(10)
+  password       String
+  role           Role
+  createdAt      DateTime         @default(now())
+  JobApplication JobApplication[]
 }
 
 enum Role {
@@ -47,20 +48,38 @@ model JobType {
 }
 
 model Job {
-  id                Int         @id @default(autoincrement())
+  id                Int              @id @default(autoincrement())
   title             String
   companyName       String
   tags              String
   skills            String
   experience        String
-  description       String      @db.LongText
+  description       String           @db.LongText
   salary            String
-  category          JobCategory @relation(fields: [categoryId], references: [id])
+  category          JobCategory      @relation(fields: [categoryId], references: [id])
   categoryId        Int
-  type              JobType     @relation(fields: [typeId], references: [id])
+  type              JobType          @relation(fields: [typeId], references: [id])
   typeId            Int
-  additionalDetails String      @db.LongText
-  createdAt         DateTime    @default(now())
+  additionalDetails String           @db.LongText
+  createdAt         DateTime         @default(now())
+  JobApplication    JobApplication[]
 }
 
-// TODO: Create model for job applications
+model JobApplication {
+  id             Int                   @id @default(autoincrement())
+  user           User                  @relation(fields: [userId], references: [id])
+  userId         Int
+  job            Job                   @relation(fields: [jobId], references: [id])
+  jobId          Int
+  resume         Bytes
+  status         JobApplicationStatus? @default(PENDING)
+  rejectReason   String?
+  relevancyScore Int?
+  createdAt      DateTime              @default(now())
+}
+
+enum JobApplicationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}

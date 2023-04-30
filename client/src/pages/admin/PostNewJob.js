@@ -64,16 +64,16 @@ const PostNewJob = () => {
   };
 
   const detailsValidationSchema = Yup.object({
-    key: Yup.string().min(2).max(20).required().label('Key'),
-    value: Yup.string().min(2).max(20).required().label('Value'),
+    key: Yup.string().min(2).max(100).required().label('Key'),
+    value: Yup.string().min(2).max(100).required().label('Value'),
   });
   const validationSchema = Yup.object({
     title: Yup.string().min(2).max(50).required().label('Title'),
-    companyName: Yup.string().min(2).max(20).required().label('Company Name'),
+    companyName: Yup.string().min(2).max(50).required().label('Company Name'),
     tags: Yup.string().required().label('Tags'),
     skills: Yup.string().required().label('Skills'),
     experience: Yup.string().required().label('Experience'),
-    description: Yup.string().required().label('Description'),
+    description: Yup.string().max(1000).required().label('Description'),
     salary: Yup.string().required().label('Salary'),
     category: Yup.string().required().label('Job Category'),
     type: Yup.string().required().label('Job Type'),

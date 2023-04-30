@@ -87,6 +87,7 @@ const Register = () => {
                   <div>
                     <InputLabel htmlFor="role">Select Your Role</InputLabel>
                     <FormikSelect name="role" id="role" as="select">
+                      <option value="">Select role</option>
                       <option value="ADMIN">Admin</option>
                       <option value="USER">Candidate</option>
                     </FormikSelect>

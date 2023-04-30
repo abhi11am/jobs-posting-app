@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const JobCategoryController = require('../controllers/JobCategoryController');
-const JobTypeController = require('../controllers/JobTypeController');
-const JobController = require('../controllers/JobController');
+const JobCategoryController = require('../controllers/admin/JobCategoryController');
+const JobTypeController = require('../controllers/admin/JobTypeController');
+const JobController = require('../controllers/admin/JobController');
+const JobApplicationController = require('../controllers/admin/JobApplicationController');
 
 // job category routes
 router.get('/job/category/list', JobCategoryController.list);
@@ -22,7 +23,10 @@ router.get('/job/:id', JobController.get);
 router.post('/job/create', JobController.create);
 router.delete('/job/delete/:id', JobController.delete);
 
-// 
+// job application routes
+router.get('/job-application/list', JobApplicationController.list);
+router.get('/job-application/:id', JobApplicationController.get);
+router.delete('/job-application/update-status/:id', JobApplicationController.updateStatus);
 
 
 
