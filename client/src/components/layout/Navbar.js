@@ -1,4 +1,5 @@
 import CustomLink from 'components/CustomLink'
+import config from 'config/config'
 import { useAuth } from 'contexts/auth'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
@@ -34,26 +35,42 @@ const LogoutLink = () => {
 }
 
 const Navbar = () => {
+  const { authState } = useAuth();
   const navigations = [
     {
       label: "Job Applications",
       to: "/admin/job-applications",
+      roles: [config.roles.ADMIN]
     },
     {
       label: "Jobs",
       to: "/admin/jobs",
+      roles: [config.roles.ADMIN]
     },
     {
       label: "Job Categories",
       to: "/admin/job-categories",
+      roles: [config.roles.ADMIN]
     },
     {
       label: "Job Types",
       to: "/admin/job-types",
+      roles: [config.roles.ADMIN]
+    },
+    {
+      label: "Jobs",
+      to: "/user/jobs",
+      roles: [config.roles.USER]
+    },
+    {
+      label: "My Applications",
+      to: "/user/my-applications",
+      roles: [config.roles.USER]
     },
     {
       label: "Logout",
       to: "/logout",
+      roles: [config.roles.ADMIN, config.roles.USER]
     }
   ];
 
@@ -72,9 +89,14 @@ const Navbar = () => {
         <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-normal border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-4 md:mt-0 md:border-0 md:bg-white">
             {navigations.map((item, index) => {
-              return (item.label === "Logout") 
-                ? <LogoutLink key={index} />
-                : <NavbarLink key={index} to={item.to}>{item.label}</NavbarLink>
+              if (item.roles.includes(authState.user.role)) {
+                return (item.label === "Logout") 
+                  ? <LogoutLink key={index} />
+                  : <NavbarLink key={index} to={item.to}>{item.label}</NavbarLink>
+              }
+              else {
+                return "";
+              }
             })}
           </ul>
         </div>

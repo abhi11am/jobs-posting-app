@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
 
       return {
         status: true,
+        redirect: (user.role === 'ADMIN') ? '/admin/jobs' : '/user/jobs',
         message: response.data.status.message
       }
     }

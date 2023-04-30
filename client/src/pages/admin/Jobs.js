@@ -6,7 +6,7 @@ import Separator from 'components/Separator'
 import Button from 'components/form/Button'
 import MasterLayout from 'components/layout/MasterLayout'
 import React, { useEffect, useState } from 'react'
-import { useGetJobByIdQuery, useGetJobsQuery } from 'store/apis/job'
+import { useGetJobByIdQuery, useGetJobsQuery } from 'store/apis/admin/job'
 import { BuildingOfficeIcon } from '@heroicons/react/24/outline'
 
 
@@ -16,7 +16,7 @@ const JobDetail = ({ id }) => {
   if (!id || isLoading || isFetching || !data) return <Loader />
 
   return (
-    <Card className="text-gray-800">
+    <Card className="">
       <div className="text-lg font-medium mb-1">{data.title}</div>
       <div className="flex items-center space-x-1 mb-1">
         <BuildingOfficeIcon className="w-4 text-gray-400" />

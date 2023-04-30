@@ -5,14 +5,25 @@ const port = 5000;
 
 const authRoutes = require('./routes/auth.js')
 const adminRoutes = require('./routes/admin.js')
-const userRoutes = require('./routes/user.js')
+const userRoutes = require('./routes/user.js');
+const multer = require('multer');
 
 app.use(cors());
 app.use(express.json());
 
+const upload = multer({
+  limits: { fieldSize: 2 * 1024 * 1024 } // 2MB
+});
+
+app.use(upload.fields([
+  { name: 'resume' }
+]))
+
 app.get('/', (req, res) => {
   return "Job Posting App APIs";
-})
+});
+
+// TODO: Need to create auth middlewares
 
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);

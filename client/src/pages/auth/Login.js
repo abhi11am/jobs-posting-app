@@ -21,7 +21,7 @@ const Login = () => {
   const onSubmit = async (values) => {
     const loginResult = await login(values.email, values.password);
     if (loginResult.status) {
-      navigate('/admin/jobs');
+      navigate(loginResult.redirect);
     }
     else {
       toast.error(loginResult.message);

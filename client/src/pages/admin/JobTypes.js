@@ -3,7 +3,7 @@ import PageTitle from 'components/PageTitle';
 import MasterLayout from 'components/layout/MasterLayout'
 import React from 'react'
 import { toast } from 'react-toastify';
-import { useCreateTypeMutation, useDeleteTypeMutation, useGetTypesQuery, useUpdateTypeMutation } from 'store/apis/job-types';
+import { useCreateTypeMutation, useDeleteTypeMutation, useGetTypesQuery, useUpdateTypeMutation } from 'store/apis/admin/job-types';
 
 const JobTypes = () => {
   // const items = ["Full-time", "Part-time", "Temporary", "Contract", "Freelance"];

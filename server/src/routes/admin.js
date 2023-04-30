@@ -26,7 +26,7 @@ router.delete('/job/delete/:id', JobController.delete);
 // job application routes
 router.get('/job-application/list', JobApplicationController.list);
 router.get('/job-application/:id', JobApplicationController.get);
-router.delete('/job-application/update-status/:id', JobApplicationController.updateStatus);
+router.post('/job-application/update-status/:id', JobApplicationController.updateStatus);
 
 
 

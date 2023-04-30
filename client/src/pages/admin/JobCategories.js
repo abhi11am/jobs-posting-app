@@ -3,7 +3,7 @@ import PageTitle from 'components/PageTitle'
 import MasterLayout from 'components/layout/MasterLayout'
 import React from 'react'
 import { toast } from 'react-toastify'
-import { useCreateCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery, useUpdateCategoryMutation } from 'store/apis/job-categories'
+import { useCreateCategoryMutation, useDeleteCategoryMutation, useGetCategoriesQuery, useUpdateCategoryMutation } from 'store/apis/admin/job-categories'
 
 const JobCategories = () => {
   // const items = ["Human Resources", "Sales", "Management", "Marketing", "Engineer", "Computer Programmer", "Electrician"];

@@ -7,9 +7,9 @@ class JobApplicationController {
   async list(req, res) {
     try {
       const jobs = await prisma.jobApplication.findMany({
-        include: {
-          category: true,
-          type: true,
+        include: { 
+          user: true,
+          job: true
         }
       });
 
@@ -30,7 +30,10 @@ class JobApplicationController {
       const id = parseInt(req.params.id);
       const jobApplication = await prisma.jobApplication.findFirst({
         where: { id },
-        include: { user: true }
+        include: { 
+          user: true,
+          job: true
+        }
       });
 
       if (jobApplication) {
@@ -51,13 +54,14 @@ class JobApplicationController {
       const id = parseInt(req.params.id);
       const update = await prisma.jobApplication.update({
         where: { id },
-        dat: { 
+        data: { 
           status,
           rejectReason
         }
       });
 
       if (update) {
+        // TODO: Send email to candidate and admin
         return responseHelper.success(res, 'Job application updated successfully', update);
       }
 
