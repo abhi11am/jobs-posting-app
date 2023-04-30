@@ -10,10 +10,10 @@ router.put('/category/update/:id', JobCategoryController.update);
 router.delete('/category/delete/:id', JobCategoryController.delete);
 
 // job type routes
-router.get('/type/list', JobCategoryController.list);
-router.post('/type/create', JobCategoryController.create);
-router.put('/type/update/:id', JobCategoryController.update);
-router.delete('/type/delete/:id', JobCategoryController.delete);
+router.get('/type/list', JobTypeController.list);
+router.post('/type/create', JobTypeController.create);
+router.put('/type/update/:id', JobTypeController.update);
+router.delete('/type/delete/:id', JobTypeController.delete);
 
 // other job routes
 

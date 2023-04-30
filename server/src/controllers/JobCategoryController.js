@@ -42,7 +42,7 @@ class JobCategoryController {
   async update (req, res) {
     try {
       const { name } = req.body;
-      const id = req.params.id;
+      const id = parseInt(req.params.id);
       const update = await prisma.jobCategory.update({
         where: { id },
         data: { name }

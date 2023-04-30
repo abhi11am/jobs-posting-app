@@ -15,7 +15,8 @@ class JobTypeController {
       return responseHelper.error(res, 'Job types not found', 404);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
@@ -33,14 +34,15 @@ class JobTypeController {
       return responseHelper.error(res, 'Failed to create job type', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
   async update(req, res) {
     try {
       const { name } = req.body;
-      const id = req.params.id;
+      const id = parseInt(req.params.id);
       const update = await prisma.jobType.update({
         where: { id },
         data: { name }
@@ -53,13 +55,14 @@ class JobTypeController {
       return responseHelper.error(res, 'Failed to update job type', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
   async delete(req, res) {
     try {
-      const id = req.params.id;
+      const id = parseInt(req.params.id);
       const destroy = await prisma.jobType.delete({
         where: { id }
       });
@@ -71,7 +74,8 @@ class JobTypeController {
       return responseHelper.error(res, 'Failed to delete job type', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
