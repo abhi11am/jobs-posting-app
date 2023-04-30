@@ -13,45 +13,49 @@ import PostNewJob from "pages/admin/PostNewJob";
 import ViewJobApplication from "pages/admin/ViewJobApplication";
 import AdminViewJobPost from "pages/admin/ViewJobPost";
 import UserViewJobPost from "pages/user/ViewJobPost";
+import { AuthProvider } from "contexts/auth";
+import RequireAuth from "components/RequireAuth";
 
 function App() {
   return (
-    <div className="bg-slate-200">
-      <Routes>
-        {/* Auth Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-        <Route path="reset-password" element={<ResetPassword />} />
+    <AuthProvider>
+      <div className="bg-slate-200">
+        <Routes>
+          {/* Auth Routes */}
+          <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+          <Route path="reset-password/:token" element={<ResetPassword />} />
 
-        {/* Admin Routes */}
-        <Route path="admin">
-          <Route path="job-applications">
-            <Route index element={<JobApplications />} />
-            <Route path="view" element={<ViewJobApplication />} />
+          {/* Admin Routes */}
+          <Route path="admin">
+            <Route path="job-applications">
+              <Route index element={<RequireAuth><JobApplications /></RequireAuth>} />
+              <Route path="view" element={<RequireAuth><ViewJobApplication /></RequireAuth>} />
+            </Route>
+            <Route path="jobs">
+              <Route index element={<RequireAuth><AdminJobList /></RequireAuth>} />
+              <Route path="create" element={<RequireAuth><PostNewJob /></RequireAuth>} />
+              <Route path="view" element={<RequireAuth><AdminViewJobPost /></RequireAuth>} />
+            </Route>
+            <Route path="job-categories" element={<RequireAuth><JobCategories /></RequireAuth>} />
+            <Route path="job-types" element={<RequireAuth><JobTypes /></RequireAuth>} />
           </Route>
-          <Route path="jobs">
-            <Route index element={<AdminJobList />} />
-            <Route path="create" element={<PostNewJob />} />
-            <Route path="view" element={<AdminViewJobPost />} />
-          </Route>
-          <Route path="job-categories" element={<JobCategories />} />
-          <Route path="job-types" element={<JobTypes />} />
-        </Route>
 
-        {/* Candidate Routes */}
-        <Route path="user">
-          <Route path="jobs">
-            <Route index element={<UserJobList />} />
-            <Route path="view" element={<UserViewJobPost />} />
+          {/* Candidate Routes */}
+          <Route path="user">
+            <Route path="jobs">
+              <Route index element={<RequireAuth><UserJobList /></RequireAuth>} />
+              <Route path="view" element={<RequireAuth><UserViewJobPost /></RequireAuth>} />
+            </Route>
           </Route>
-        </Route>
 
-        {/* Other Route */}
-        <Route path="*" element={<div>404 Error</div>} />
-      </Routes>
-    </div>
+          {/* Other Route */}
+          <Route path="*" element={<div>404 Error</div>} />
+        </Routes>
+      </div>
+    </AuthProvider>
   );
 }
 

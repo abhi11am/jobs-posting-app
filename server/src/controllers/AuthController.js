@@ -2,6 +2,7 @@ const responseHelper = require('../helpers/ResponseHelper');
 const genericHelper = require('../helpers/GenericHelper');
 const userService = require('../services/UserService');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -33,7 +34,7 @@ class AuthController {
       return responseHelper.error(res, 'Failed to register user');
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
@@ -64,16 +65,17 @@ class AuthController {
         return responseHelper.success(res, 'User logged in successfully', { user, token });
       }
 
-      return responseHelper.error(res, 'Invalid credentials', 400);
+      return responseHelper.error(res, 'Invalid credentials', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
   async forgotPassword (req, res) {
     try {
       const { email } = req.body;
+      let resetRequest = null;
       
       const userExists = await userService.findUserByEmail(email);
 
@@ -85,11 +87,21 @@ class AuthController {
       const token = genericHelper.randomString(50);
 
       // create password reset request
-      const resetRequest = await prisma.passwordResetRequest.upsert({
-        where: { email },
-        update: { token },
-        create: { email, token } 
+      const requestExists = await prisma.passwordReset.findFirst({
+        where: { email }
       });
+
+      if (requestExists) {
+        resetRequest = await prisma.passwordReset.update({
+          where: { email },
+          data: { token }
+        })
+      }
+      else {
+        resetRequest = await prisma.passwordReset.create({
+          data: { email, token }
+        })
+      }
 
       // TODO: send email to user with password reset link 
 
@@ -100,7 +112,7 @@ class AuthController {
       return responseHelper.error(res, 'Something went wrong', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      return responseHelper.error(res, 'Somthing went wrong', 500);
     }
   }
 
@@ -110,7 +122,7 @@ class AuthController {
       const token = req.params.token;
 
       // check for request by token
-      const resetRequest = await prisma.passwordResetRequest.findFirst({
+      const resetRequest = await prisma.passwordReset.findFirst({
         where: { token }
       });
 
@@ -128,7 +140,7 @@ class AuthController {
       })
 
       // delete reset request
-      await prisma.passwordResetRequest.deleteMany({
+      await prisma.passwordReset.deleteMany({
         where: { email: resetRequest.email }
       });
 
@@ -139,7 +151,7 @@ class AuthController {
       return responseHelper.error(res, 'Failed to update password');
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 

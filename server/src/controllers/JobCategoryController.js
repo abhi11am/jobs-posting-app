@@ -15,7 +15,8 @@ class JobCategoryController {
       return responseHelper.error(res, 'Categories not found', 404);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
@@ -33,7 +34,8 @@ class JobCategoryController {
       return responseHelper.error(res, 'Failed to create category', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
@@ -53,13 +55,14 @@ class JobCategoryController {
       return responseHelper.error(res, 'Failed to update category', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 
   async delete (req, res) {
     try {
-      const id = req.params.id;
+      const id = parseInt(req.params.id);
       const destroy = await prisma.jobCategory.delete({
         where: { id }
       });
@@ -71,7 +74,8 @@ class JobCategoryController {
       return responseHelper.error(res, 'Failed to delete category', 500);
     }
     catch (err) {
-      return responseHelper.error(res, err.message, 500);
+      console.log(err.message);
+      return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
 

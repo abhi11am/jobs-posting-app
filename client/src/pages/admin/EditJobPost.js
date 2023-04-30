@@ -16,42 +16,42 @@ const EditJobPost = () => {
       <Card>
         <form className="space-y-4 md:space-y-6" action="#">
           <div>
-            <InputLabel for="title">Job Title</InputLabel>
+            <InputLabel htmlFor="title">Job Title</InputLabel>
             <Input type="text" name="title" id="title" placeholder="e.g. ReactJS Developer" required />
           </div>
 
           <div>
-            <InputLabel for="company-name">Company Name</InputLabel>
+            <InputLabel htmlFor="company-name">Company Name</InputLabel>
             <Input type="text" name="company-name" id="company-name" placeholder="XYZ Technologies" required />
           </div>
 
           <div>
-            <InputLabel for="tags">Tags</InputLabel>
+            <InputLabel htmlFor="tags">Tags</InputLabel>
             <Input type="text" name="tags" id="tags" placeholder="" required />
           </div>
 
           <div>
-            <InputLabel for="skills">Skills Required</InputLabel>
+            <InputLabel htmlFor="skills">Skills Required</InputLabel>
             <Input type="text" name="skills" id="skills" placeholder="" required />
           </div>
 
           <div>
-            <InputLabel for="experience-required">Experience Required</InputLabel>
+            <InputLabel htmlFor="experience-required">Experience Required</InputLabel>
             <Input type="text" name="experience-required" id="experience-required" placeholder="" required />
           </div>
 
           <div>
-            <InputLabel for="description">Description</InputLabel>
+            <InputLabel htmlFor="description">Description</InputLabel>
             <Input type="text" name="description" id="description" placeholder="" />
           </div>
 
           <div>
-            <InputLabel for="salary">Salary</InputLabel>
+            <InputLabel htmlFor="salary">Salary</InputLabel>
             <Input type="text" name="salary" id="salary" placeholder="" />
           </div>
 
           <div>
-            <InputLabel for="additional-details">Additional Details</InputLabel>
+            <InputLabel htmlFor="additional-details">Additional Details</InputLabel>
             <Input type="text" name="additional-details" id="additional-details" placeholder="" />
           </div>
 

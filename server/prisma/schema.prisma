@@ -27,7 +27,7 @@ enum Role {
 
 model PasswordReset {
   id        Int      @id @default(autoincrement())
-  email     String
+  email     String   @unique
   token     String
   createdAt DateTime @default(now())
 }

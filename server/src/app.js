@@ -1,3 +1,4 @@
+const cors = require('cors');
 const express = require('express');
 const app = express();
 const port = 5000;
@@ -6,6 +7,12 @@ const authRoutes = require('./routes/auth.js')
 const adminRoutes = require('./routes/admin.js')
 const userRoutes = require('./routes/user.js')
 
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req, res) => {
+  return "Job Posting App APIs";
+})
 
 app.use('/auth', authRoutes);
 app.use('/admin', adminRoutes);
