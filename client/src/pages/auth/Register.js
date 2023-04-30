@@ -33,7 +33,6 @@ const Register = () => {
   });
 
   const onSubmit = async (values) => {
-    console.log('here');
     await register(values)
       .unwrap()
       .then((fulfilled) => {
@@ -94,7 +93,7 @@ const Register = () => {
                   </div>
                   <Button type="submit" className="w-full">Create an account</Button>
                   <p className="text-sm font-light text-gray-500">
-                    Already have an account? <CustomLink to="/login">Login here</CustomLink>
+                    Already have an account? <CustomLink to="/login" className="font-medium">Login here</CustomLink>
                   </p>
                 </Form>
               )}

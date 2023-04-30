@@ -55,11 +55,11 @@ const Login = () => {
                     <FormikInput type="password" name="password" id="password" placeholder="••••••••" />
                   </div>
                   <div className="flex items-center justify-end">
-                    <CustomLink to="/forgot-password">Forgot password?</CustomLink>
+                    <CustomLink to="/forgot-password" className="font-medium">Forgot password?</CustomLink>
                   </div>
                   <Button type="submit" className="w-full">Login</Button>
                   <p className="text-sm font-light text-gray-500">
-                    Are you a new user? <CustomLink to="/register">Sign up here</CustomLink>
+                    Are you a new user? <CustomLink to="/register" className="font-medium">Sign up here</CustomLink>
                   </p>
                 </Form>
               )}

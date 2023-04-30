@@ -5,7 +5,7 @@ const MasterLayout = ({ children }) => {
   return (
     <div>
       <Navbar />
-      <main className="min-h-[calc(100vh-70px)] mt-[70px] max-w-screen-xl mx-auto p-4">
+      <main className="min-h-[calc(100vh-70px)] mt-[70px] max-w-screen-xl overflow-auto mx-auto p-4">
         {children}
       </main>
     </div>

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 export const jobTypeApi = createApi({
   reducerPath: 'jobTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_SERVER_URL}/admin/type`
+    baseUrl: `${process.env.REACT_APP_SERVER_URL}/admin/job/type`
   }),
   tagTypes: ["JobType"],
   endpoints: (builder) => ({

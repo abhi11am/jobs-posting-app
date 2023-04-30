@@ -56,7 +56,7 @@ const ForgotPassword = () => {
                   </div>
                   <Button type="submit" className="w-full">Send reset password email</Button>
                   <p className="text-sm font-light text-gray-500">
-                    Return back to <CustomLink to="/login">Login</CustomLink>
+                    Return back to <CustomLink to="/login" className="font-medium">Login</CustomLink>
                   </p>
                 </Form>
               )}
