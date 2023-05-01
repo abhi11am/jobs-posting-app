@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const sendResetPasswordEmail = require('../mail/SendResetPasswordEmail');
 
 class AuthController {
 
@@ -105,7 +106,8 @@ class AuthController {
         })
       }
 
-      // TODO: send email to user with password reset link 
+      // send email to user with password reset link 
+      sendResetPasswordEmail(userExists, token);
 
       if (resetRequest) {
         return responseHelper.success(res, 'Reset password link has been sent to your email');

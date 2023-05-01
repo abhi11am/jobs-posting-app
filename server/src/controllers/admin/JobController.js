@@ -60,6 +60,7 @@ class JobController {
           experience,
           description,
           salary,
+          adminId: 1, // TODO: get from req
           categoryId: parseInt(category),
           typeId: parseInt(type),
           additionalDetails: JSON.stringify(additionalDetails),

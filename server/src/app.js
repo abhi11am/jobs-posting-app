@@ -2,6 +2,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const port = 5000;
+const { engine } = require('express-handlebars');
 
 const authRoutes = require('./routes/auth.js')
 const adminRoutes = require('./routes/admin.js')
@@ -11,12 +12,15 @@ const multer = require('multer');
 app.use(cors());
 app.use(express.json());
 
+app.engine("handlebars", engine());
+app.set("view engine", "hbs");
+app.set("views", "./views");
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads')
   },
   filename: function (req, file, cb) {
-    console.log(file)
     cb(null, `${Date.now()}-${file.originalname}`)
   }
 })

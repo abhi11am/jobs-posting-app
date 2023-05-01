@@ -19,6 +19,7 @@ model User {
   role           Role
   createdAt      DateTime         @default(now())
   JobApplication JobApplication[]
+  Job            Job[]
 }
 
 enum Role {
@@ -60,6 +61,8 @@ model Job {
   categoryId        Int
   type              JobType          @relation(fields: [typeId], references: [id])
   typeId            Int
+  admin             User             @relation(fields: [adminId], references: [id])
+  adminId           Int
   additionalDetails String           @db.LongText
   createdAt         DateTime         @default(now())
   JobApplication    JobApplication[]
