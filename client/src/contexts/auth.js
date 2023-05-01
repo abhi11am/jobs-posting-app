@@ -1,18 +1,25 @@
 import axios from 'axios';
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
+import Cookies from 'js-cookie'
+import jwtDecode from 'jwt-decode';
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
-  const [authState, setAuthState] = useState({
-    token: localStorage.getItem('token'),
-    user: JSON.parse(localStorage.getItem('user')),
-  });
+const getUserData = (token) => {
+  try {
+    return jwtDecode(token);
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
 
-  useEffect(() => {
-    localStorage.setItem('token', authState.token);
-    localStorage.setItem('user', JSON.stringify(authState.user));
-  }, [authState]);
+export const AuthProvider = ({ children }) => {
+  const token = Cookies.get('token');
+  const [authState, setAuthState] = useState({
+    token: token,
+    user: token ? getUserData(token) : null,
+  });
 
   const login = async (email, password) => {
     try {
@@ -22,7 +29,9 @@ export const AuthProvider = ({ children }) => {
       });
 
       const { token, user } = response.data.data;
+
       setAuthState({ token, user });
+      Cookies.set('token', token, { secure: true });
 
       return {
         status: true,
@@ -40,8 +49,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setAuthState({ toke: null, user: null });
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    Cookies.remove('token');
     return true;
   }
 

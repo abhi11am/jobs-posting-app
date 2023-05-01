@@ -1,9 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import genericHelper from 'helpers/GenericHelper';
 
 export const jobTypeApi = createApi({
   reducerPath: 'jobTypeApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.REACT_APP_SERVER_URL}/admin/job/type`
+    baseUrl: `${process.env.REACT_APP_SERVER_URL}/admin/job/type`,
+    prepareHeaders: async (headers) => {
+      headers.set('x-access-token', genericHelper.getAccessToken())
+      return headers;
+    }
   }),
   tagTypes: ["JobType"],
   endpoints: (builder) => ({

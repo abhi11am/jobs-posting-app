@@ -6,10 +6,6 @@ const genericHelper = require('../../helpers/GenericHelper');
 
 class JobApplicationController {
 
-  async myApplications(req, res) {
-
-  }
-
   async submit(req, res) {
     try {
       const { path } = req.files.resume[0];

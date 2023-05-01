@@ -4,6 +4,9 @@ const JobCategoryController = require('../controllers/admin/JobCategoryControlle
 const JobTypeController = require('../controllers/admin/JobTypeController');
 const JobController = require('../controllers/admin/JobController');
 const JobApplicationController = require('../controllers/admin/JobApplicationController');
+const auth = require('../middlewares/auth.js');
+
+router.use(auth.admin);
 
 // job category routes
 router.get('/job/category/list', JobCategoryController.list);
