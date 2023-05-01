@@ -1,8 +1,6 @@
 const responseHelper = require('../../helpers/ResponseHelper');
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const fs = require('fs');
-const path = require('path');
 
 class JobApplicationController {
 
@@ -12,19 +10,14 @@ class JobApplicationController {
 
   async submit(req, res) {
     try {
-      // const __dirname = path.resolve();
-      // const uploadFolder = path.join(__dirname, 'uploads');
-      
-      const { buffer, originalname } = req.files.resume[0];
-      
-      // console.log(`/${uploadFolder}/${originalname}`)
-      // console.log(fs.writeFileSync(`\\${uploadFolder}\\${originalname}`, buffer));
+      const { path } = req.files.resume[0];
 
       const application = await prisma.jobApplication.create({
         data: {
-          userId: 1,
+          userId: 1, // TODO: Should fetch from req
           jobId: parseInt(req.params.id),
-          resume: buffer
+          resume: path,
+          relevancyScore: 10 // TODO: calculate score
         }
       });
 

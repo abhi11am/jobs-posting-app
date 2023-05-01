@@ -71,7 +71,7 @@ model JobApplication {
   userId         Int
   job            Job                   @relation(fields: [jobId], references: [id])
   jobId          Int
-  resume         Bytes
+  resume         String
   status         JobApplicationStatus? @default(PENDING)
   rejectReason   String?
   relevancyScore Int?

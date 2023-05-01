@@ -34,6 +34,7 @@ class AuthController {
       return responseHelper.error(res, 'Failed to register user');
     }
     catch (err) {
+      console.log(err);
       return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
@@ -68,6 +69,7 @@ class AuthController {
       return responseHelper.error(res, 'Invalid credentials', 500);
     }
     catch (err) {
+      console.log(err)
       return responseHelper.error(res, 'Something went wrong', 500);
     }
   }
@@ -112,6 +114,7 @@ class AuthController {
       return responseHelper.error(res, 'Something went wrong', 500);
     }
     catch (err) {
+      console.log(err);
       return responseHelper.error(res, 'Somthing went wrong', 500);
     }
   }
@@ -151,6 +154,7 @@ class AuthController {
       return responseHelper.error(res, 'Failed to update password');
     }
     catch (err) {
+      console.log(err);
       return responseHelper.error(res, 'Something went wrong', 500);
     }
   }

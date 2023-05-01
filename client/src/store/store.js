@@ -5,8 +5,8 @@ import { jobCategoryApi } from './apis/admin/job-categories'
 import { jobTypeApi } from './apis/admin/job-types'
 import { jobApi as jobAdminApi } from './apis/admin/job'
 import { jobApi as jobUserApi } from './apis/user/job'
-import { jobApplicationApi as jobAdminApplicationApi } from './apis/admin/job-application'
-import { jobApplicationApi as jobUserApplicationApi } from './apis/user/job-application'
+import { jobAdminApplicationApi } from './apis/admin/job-application'
+import { jobUserApplicationApi } from './apis/user/job-application'
 
 
 export const store = configureStore({
