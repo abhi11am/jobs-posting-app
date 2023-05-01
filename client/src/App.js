@@ -10,13 +10,9 @@ import UserJobList from "pages/user/Jobs";
 import JobCategories from "pages/admin/JobCategories";
 import JobTypes from "pages/admin/JobTypes";
 import PostNewJob from "pages/admin/PostNewJob";
-import ViewJobApplication from "pages/admin/ViewJobApplication";
-import AdminViewJobPost from "pages/admin/ViewJobPost";
-import UserViewJobPost from "pages/user/ViewJobPost";
 import { AuthProvider } from "contexts/auth";
 import RequireAuth from "components/RequireAuth";
 import config from "config/config";
-import MyApplications from "pages/user/MyApplications";
 
 function App() {
   return (
@@ -32,14 +28,10 @@ function App() {
 
           {/* Admin Routes */}
           <Route path="admin">
-            <Route path="job-applications">
-              <Route index element={<RequireAuth roles={[config.roles.ADMIN]}><JobApplications /></RequireAuth>} />
-              <Route path="view" element={<RequireAuth roles={[config.roles.ADMIN]}><ViewJobApplication /></RequireAuth>} />
-            </Route>
+            <Route path="job-applications" element={<RequireAuth roles={[config.roles.ADMIN]}><JobApplications /></RequireAuth>} />
             <Route path="jobs">
               <Route index element={<RequireAuth roles={[config.roles.ADMIN]}><AdminJobList /></RequireAuth>} />
               <Route path="create" element={<RequireAuth roles={[config.roles.ADMIN]}><PostNewJob /></RequireAuth>} />
-              <Route path="view" element={<RequireAuth roles={[config.roles.ADMIN]}><AdminViewJobPost /></RequireAuth>} />
             </Route>
             <Route path="job-categories" element={<RequireAuth roles={[config.roles.ADMIN]}><JobCategories /></RequireAuth>} />
             <Route path="job-types" element={<RequireAuth roles={[config.roles.ADMIN]}><JobTypes /></RequireAuth>} />
@@ -47,11 +39,7 @@ function App() {
 
           {/* User Routes */}
           <Route path="user">
-            <Route path="jobs">
-              <Route index element={<RequireAuth roles={[config.roles.USER]}><UserJobList /></RequireAuth>} />
-              <Route path="view" element={<RequireAuth roles={[config.roles.USER]}><UserViewJobPost /></RequireAuth>} />
-            </Route>
-            <Route path="my-applications" element={<RequireAuth roles={[config.roles.USER]}><MyApplications /></RequireAuth>} />
+            <Route path="jobs" element={<RequireAuth roles={[config.roles.USER]}><UserJobList /></RequireAuth>} />
           </Route>
 
           {/* Other Route */}

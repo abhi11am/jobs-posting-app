@@ -2,6 +2,7 @@ const responseHelper = require('../../helpers/ResponseHelper');
 const { PrismaClient } = require("@prisma/client");
 const sendApplicationSubmissionEmail = require('../../mail/SendApplicationSubmissionEmail');
 const prisma = new PrismaClient();
+const genericHelper = require('../../helpers/GenericHelper');
 
 class JobApplicationController {
 
@@ -14,12 +15,16 @@ class JobApplicationController {
       const { path } = req.files.resume[0];
       const jobId = parseInt(req.params.id);
 
+      const job = await prisma.job.findFirst({
+        where: { id: jobId }
+      });
+
       const application = await prisma.jobApplication.create({
         data: {
           userId: 2, // TODO: Should fetch from req
           jobId: jobId,
           resume: path,
-          relevancyScore: 10 // TODO: calculate score
+          relevancyScore: await genericHelper.relevacyScore(path, job.skills.split(", "))
         }
       });
 

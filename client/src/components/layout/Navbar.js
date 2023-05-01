@@ -63,11 +63,6 @@ const Navbar = () => {
       roles: [config.roles.USER]
     },
     {
-      label: "My Applications",
-      to: "/user/my-applications",
-      roles: [config.roles.USER]
-    },
-    {
       label: "Logout",
       to: "/logout",
       roles: [config.roles.ADMIN, config.roles.USER]
