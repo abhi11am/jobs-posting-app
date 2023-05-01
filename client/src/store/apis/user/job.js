@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-export const jobApi = createApi({
-  reducerPath: 'jobApi',
+export const jobUserApi = createApi({
+  reducerPath: 'jobUserApi',
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_SERVER_URL}/user/job`
   }),
@@ -24,4 +24,4 @@ export const {
   useGetJobsQuery,
   useGetJobByIdQuery,
   useCreateJobMutation
-} = jobApi
+} = jobUserApi

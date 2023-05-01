@@ -15,7 +15,7 @@ import { useSubmitJobApplicationMutation } from 'store/apis/user/job-application
 import { toast } from 'react-toastify'
 import { JobList } from 'components/job/JobList'
 
-const JobApplicationForm = ({ id, handleCancel }) => {
+const JobApplicationForm = ({ id, handleOnSubmit, handleCancel }) => {
   const FILE_SIZE = 1024 * 1024 * 2; // 2 MB
   const SUPPORTED_FORMATS = ['application/pdf'];
 
@@ -46,7 +46,7 @@ const JobApplicationForm = ({ id, handleCancel }) => {
       .then((fulfilled) => {
         toast.success(fulfilled.status.message);
         resetForm();
-        handleCancel();
+        handleOnSubmit();
       })
       .catch((rejected) => {
         if (rejected.data) {
@@ -85,7 +85,12 @@ const JobApplicationForm = ({ id, handleCancel }) => {
 
 const JobDetail = ({ id }) => {
   const { data, isLoading, isFetching } = useGetJobByIdQuery(id);
+  const [isApplied, setIsApplied] = useState(true);
   const [isApplying, setIsApplying] = useState(false);
+
+  useEffect(() => {
+    if (data) setIsApplied(data.JobApplication.length);
+  }, [data]);
 
   if (!id || isLoading || isFetching || !data) return <Loader />
 
@@ -128,9 +133,25 @@ const JobDetail = ({ id }) => {
           <div key={index} className="px-2 py-1 bg-gray-200 text-xs rounded">{item}</div>
         ))}
       </div>
-      {isApplying 
-        ? <JobApplicationForm id={id} handleCancel={() => setIsApplying(false)} />
-        : <Button type="button" onClick={() => setIsApplying(true)}>Apply Now</Button>}
+      {isApplying
+        ? <JobApplicationForm 
+            id={id} 
+            handleOnSubmit={() => {
+              setIsApplied(true);
+              setIsApplying(false);
+            }} 
+            handleCancel={() => setIsApplying(false)} 
+          />
+        : <Button 
+            type="button" 
+            onClick={() => {
+              if(!isApplied) setIsApplying(true);
+            }}
+            disabled={isApplied}
+          >
+            {isApplied ? "Applied" : "Apply Now" }
+          </Button>
+      }
     </Card>
   )
 }

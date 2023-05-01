@@ -33,6 +33,11 @@ class JobController {
         include: {
           category: true,
           type: true,
+          JobApplication: {
+            where: {
+              userId: 1 // TODO: get this from req
+            }
+          },
         }
       });
 
