@@ -2,8 +2,6 @@ import Card from "components/Card"
 import Loader from "components/Loader"
 import Separator from "components/Separator"
 
-const { BuildingOfficeIcon } = require("@heroicons/react/24/outline")
-
 const JobListItem = ({ data, jobDetailId, handleViewJobDetail }) => {
   return (
     <Card
@@ -12,7 +10,6 @@ const JobListItem = ({ data, jobDetailId, handleViewJobDetail }) => {
     >
       <div className="text-lg font-medium mb-1">{data.title}</div>
       <div className="flex items-center space-x-1 mb-1">
-        <BuildingOfficeIcon className="w-4 text-gray-400" />
         <div className="text-xs text-gray-600">{data.companyName}</div>
       </div>
       <div className="flex items-center space-x-1 mb-2">

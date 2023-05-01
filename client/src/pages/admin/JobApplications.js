@@ -6,7 +6,6 @@ import MasterLayout from 'components/layout/MasterLayout'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import React, { useEffect, useState } from 'react'
-import { ArrowDownTrayIcon } from "@heroicons/react/24/outline"
 import { useGetJobApplicationByIdQuery, useGetJobApplicationsQuery, useUpdateJobApplicationStatusMutation } from 'store/apis/admin/job-application'
 import Button from 'components/form/Button'
 import { toast } from 'react-toastify'
@@ -92,7 +91,6 @@ const JobAppDetail = ({ id }) => {
           <div className="font-medium">{data.relevancyScore}</div>
         </div>
         <button className="flex items-center space-x-2 px-2 py-1 rounded bg-gray-200 mb-8">
-          <ArrowDownTrayIcon className="w-4 text-gray-600" />
           <div className="text-sm">Download Resume</div>
         </button>
         <JobApplicationAction data={data} />

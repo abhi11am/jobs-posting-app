@@ -7,7 +7,6 @@ import React, { useEffect, useState } from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import { useGetJobByIdQuery, useGetJobsQuery } from 'store/apis/user/job'
-import { BuildingOfficeIcon } from '@heroicons/react/24/outline'
 import Button from 'components/form/Button'
 import FormikFileInput from 'components/form/FormikFileInput'
 import InputLabel from 'components/form/InputLabel'
@@ -102,7 +101,6 @@ const JobDetail = ({ id }) => {
     <Card className="">
       <div className="text-lg font-medium mb-1">{data.title}</div>
       <div className="flex items-center space-x-1 mb-1">
-        <BuildingOfficeIcon className="w-4 text-gray-400" />
         <div className="text-xs text-gray-600">{data.companyName}</div>
       </div>
       <div className="flex items-center space-x-1 mb-2">
