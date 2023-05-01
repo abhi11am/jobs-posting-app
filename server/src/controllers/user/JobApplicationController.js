@@ -37,7 +37,8 @@ class JobApplicationController {
             }
           }
         });
-        sendApplicationSubmissionEmail(newApplication);
+        sendApplicationSubmissionEmail("ADMIN", newApplication);
+        sendApplicationSubmissionEmail("USER", newApplication);
 
         return responseHelper.success(res, 'Job application submitted successfully', application);
       }

@@ -14,7 +14,11 @@ import { JobList } from 'components/job/JobList'
 const JobDetail = ({ id }) => {
   const { data, isLoading, isFetching } = useGetJobByIdQuery(id);
 
-  if (!id || isLoading || isFetching || !data) return <Loader />
+  if (!id || isLoading || isFetching) return <Loader />
+
+  if (!data && !isLoading && !isFetching) {
+    return <div className="flex items-center justify-center">No data found</div>
+  }
 
   return (
     <Card className="">
@@ -90,7 +94,7 @@ const Jobs = () => {
           />
         </div>
         <div className="w-1/2">
-          {jobDetailId ? <JobDetail id={jobDetailId} /> : <Loader />}
+          {jobDetailId ? <JobDetail id={jobDetailId} /> : ""}
         </div>
       </div>
     </MasterLayout>

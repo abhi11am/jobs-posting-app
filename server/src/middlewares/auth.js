@@ -29,6 +29,8 @@ const user = (req, res, next) => {
     return res.status(401).send("A token is required for authentication");
   }
   try {
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+    
     if (decoded.role === "USER") {
       req.user = decoded;
       return next();

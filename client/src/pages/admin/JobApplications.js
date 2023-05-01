@@ -40,7 +40,7 @@ const JobApplicationAction = ({ data }) => {
             handleUpdateStatus({ status: "REJECTED", ...values });
           }}
           validationSchema={() => {
-            return Yup.object({ rejectReason: Yup.string().min(2).max(100).nullable().label('Reason') });
+            return Yup.object({ rejectReason: Yup.string().min(2).max(100).required().label('Reason') });
           }}
         >
           {({ handleSubmit, handleChange, values, errors, isSubmitting }) => (
@@ -69,7 +69,11 @@ const JobApplicationAction = ({ data }) => {
 const JobAppDetail = ({ id }) => {
   const { data, isLoading, isFetching } = useGetJobApplicationByIdQuery(id);
 
-  if (!id || isLoading || isFetching || !data) return <Loader />
+  if (!id || isLoading || isFetching) return <Loader />
+
+  if (!data && !isLoading && !isFetching) {
+    return <div className="flex items-center justify-center">No data found</div>
+  }
 
   return (
     <Card className="">
@@ -164,7 +168,7 @@ const JobApplications = () => {
           />
         </div>
         <div className="w-1/2">
-          {jobAppDetailId ? <JobAppDetail id={jobAppDetailId} /> : <Loader />}
+          {jobAppDetailId ? <JobAppDetail id={jobAppDetailId} /> : ""}
         </div>
       </div>
     </MasterLayout>
