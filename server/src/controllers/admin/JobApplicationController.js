@@ -1,5 +1,6 @@
 const responseHelper = require('../../helpers/ResponseHelper');
 const { PrismaClient } = require("@prisma/client");
+const sendApplicationRejectedEmail = require('../../mail/SendApplicationRejectedEmail');
 const prisma = new PrismaClient();
 
 class JobApplicationController {
@@ -61,7 +62,17 @@ class JobApplicationController {
       });
 
       if (update) {
-        // TODO: Send email to candidate and admin
+        // Send email to candidate if rejected
+        if (status === "REJECTED") {
+          const application = await prisma.jobApplication.findFirst({
+            where: { id },
+            include: {
+              user: true,
+              job: true,
+            }
+          });
+          sendApplicationRejectedEmail(application);
+        }
         return responseHelper.success(res, 'Job application updated successfully', update);
       }
 

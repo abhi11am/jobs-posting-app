@@ -25,16 +25,18 @@ class JobApplicationController {
 
       if (application) {
         // send application submission email to user and admin
-        const user = await prisma.user.findFirst({ where: { id: 2 } });  // TODO: should fetch from req
-        const job = await prisma.job.findFirst({ 
-          where: { 
-            id: jobId 
+        const newApplication = await prisma.jobApplication.findFirst({
+          where: {
+            id: application.id
           },
           include: {
-            admin: true
+            user: true,
+            job: { 
+              include: { admin: true }
+            }
           }
         });
-        sendApplicationSubmissionEmail(user, job);
+        sendApplicationSubmissionEmail(newApplication);
 
         return responseHelper.success(res, 'Job application submitted successfully', application);
       }

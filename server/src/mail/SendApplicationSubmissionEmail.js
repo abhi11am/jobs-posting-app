@@ -1,6 +1,10 @@
 const mailHelper = require("../helpers/MailHelper");
 
-const sendApplicationSubmissionEmail = (user, job) => {
+const sendApplicationSubmissionEmail = (application) => {
+  const user = application.user;
+  const admin = application.job.admin;
+  const job = application.job;
+
   // send to user
   mailHelper.to(user.email)
     .subject("Job Application Submitted")
@@ -12,7 +16,7 @@ const sendApplicationSubmissionEmail = (user, job) => {
     .send();
 
   // send to admin
-  mailHelper.to(job.admin.email)
+  mailHelper.to(admin.email)
     .subject("Job Application Submitted")
     .view("application-submission-admin")
     .context({

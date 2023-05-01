@@ -42,7 +42,7 @@ const JobDetail = ({ id }) => {
       </div>
       <p className="text-sm whitespace-pre-line mb-6">{data.description}</p>
       <div className="space-y-2 mb-6">
-        {JSON.parse(data.additionalDetails).map((item, index) => (
+        {data.additionalDetails && JSON.parse(data.additionalDetails).map((item, index) => (
           <div key={index} className="text-sm space-x-1">
             <span className="font-medium">{item.key}:</span>
             <span className="">{item.value}</span>
