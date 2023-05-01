@@ -35,7 +35,7 @@ app.use(upload.fields([
 ]))
 
 app.get('/', (req, res) => {
-  return "Job Posting App APIs";
+  res.status(200).send("Job Posting App APIs");
 });
 
 app.use('/auth', authRoutes);
